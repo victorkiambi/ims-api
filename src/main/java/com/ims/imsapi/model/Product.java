@@ -22,11 +22,13 @@ public class Product {
     private String description;
     private BigDecimal price;
     private int quantity;
+    private int stock;
+    private String sku;
     private String image_url;
+    private String type;
 
     @Column(insertable=false, updatable=false)
     private Long category_id;
-    private Long code;
 
     @ManyToOne()
     @JoinColumn(name = "category_id")
@@ -37,6 +39,6 @@ public class Product {
 
 
     public ProductDto toProductDto() {
-        return new ProductDto(id, name, description, price, quantity, image_url, category_id, code);
+        return new ProductDto(id, name, description, price, quantity, image_url, quantity, description, category_id, type);
     }
 }

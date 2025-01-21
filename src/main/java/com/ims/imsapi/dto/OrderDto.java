@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,13 +14,15 @@ import lombok.Setter;
 public class OrderDto {
     private Long id;
     private Long customer_id;
-    private String created_at;
+    private Date created_at;
     private String status;
-    private String shipping_address;
-    private String shipping_city;
-    private String shipping_county;
-    private String shipping_country;
+    private Float total;
+
     private String payment_method;
     private String payment_status;
+    private String shipping_method;
+    private String shipping_status;
+    private String notes;
+
 }
 

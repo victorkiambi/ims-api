@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 public class OrderItem {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(insertable=false, updatable=false)
     private Long order_id;
     @Column(insertable=false, updatable=false)
@@ -23,9 +22,7 @@ public class OrderItem {
     private int quantity;
     private BigDecimal price;
     private BigDecimal total;
-    private String status;
-    private String payment_status;
-    private String shipping_status;
+
 
     @ManyToOne()
     @JoinColumn(name = "order_id")

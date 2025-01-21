@@ -23,16 +23,12 @@ public class Customer {
     @NotBlank(message = "Email is required")
     private String email;
     private String phone;
-    private String address;
-    private String city;
-    private String county;
-    private String country;
     private String password;
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
     public CustomerDto toCustomerDto() {
-        return new CustomerDto(id, name, email, phone, address, city, county, country);
+        return new CustomerDto(id, name, email, phone);
     }
 }
