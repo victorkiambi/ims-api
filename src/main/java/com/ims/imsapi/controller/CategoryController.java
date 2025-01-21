@@ -1,7 +1,6 @@
 package com.ims.imsapi.controller;
 
 import com.ims.imsapi.dto.CategoryDto;
-import com.ims.imsapi.model.Category;
 import com.ims.imsapi.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

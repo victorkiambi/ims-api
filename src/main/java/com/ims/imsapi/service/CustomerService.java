@@ -8,6 +8,10 @@ import com.ims.imsapi.model.Order;
 import com.ims.imsapi.model.OrderItem;
 import com.ims.imsapi.repository.CustomerRepository;
 import com.ims.imsapi.repository.OrderRepository;
+
+import java.util.logging.Logger;
+
+import org.apache.commons.logging.Log;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +31,11 @@ public class CustomerService {
     }
 
     public Customer loadCustomerbyUsername(String email) throws UsernameNotFoundException {
-        if ("email".equals(email)) {
+        var customer = customerRepository.findByEmail(email);
+        if (customer != null) {
             return Customer.builder()
-                    .email("email")
-                    .password("password")
+                    .email(customer.getEmail())
+                    .password(customer.getPassword())
                     .build();
         } else {
             throw new UsernameNotFoundException("User not found with email: " + email);

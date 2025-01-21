@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ims.imsapi.model.Customer;
 import com.ims.imsapi.service.CustomerService;
 import com.ims.imsapi.utils.JwtUtil;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,15 @@ import java.util.Map;
 @Component
 public class Oauth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    @Autowired
-    private CustomerService customerService;
+    private final JwtUtil jwtUtil;
+    private final CustomerService customerService;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    public Oauth2LoginSuccessHandler(JwtUtil jwtUtil, CustomerService customerService) {
+        this.jwtUtil = jwtUtil;
+        this.customerService = customerService;
+    }
+    
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -36,14 +39,14 @@ public class Oauth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         String name = oauth2User.getAttribute("name");
         String picture = oauth2User.getAttribute("picture");
 
-//        // Check if the user is already registered
-//        if (!customerService.existsByEmail(email)) {
-//            // If not, register the user
-//            Customer customer = new Customer();
-//            customer.setEmail(email);
-//            customer.setName(name);
-//            customerService.createCustomer(customer);
-//        }
+       // Check if the user is already registered
+       if (!customerService.existsByEmail(email)) {
+           // If not, register the user
+           Customer customer = new Customer();
+           customer.setEmail(email);
+           customer.setName(name);
+           customerService.createCustomer(customer);
+       }
 
         // Generate a JWT token
         String token = jwtUtil.generateToken(email);

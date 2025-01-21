@@ -4,7 +4,6 @@ import com.ims.imsapi.dto.CustomerDto;
 import com.ims.imsapi.dto.OrderResponseDto;
 import com.ims.imsapi.model.Customer;
 import com.ims.imsapi.model.NewCustomerOrder;
-import com.ims.imsapi.model.Order;
 import com.ims.imsapi.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
